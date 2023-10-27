@@ -89,7 +89,8 @@ const startGame = () => {
         clearInterval(obstacleInterval);
     }
     
-    obstacleInterval = setInterval(placeObstacles, 800);
+    
+    obstacleInterval = setInterval(placeObstacles, 900);
 
 }
 
@@ -179,19 +180,19 @@ function placeObstacles() {
 
     let placeObstacleChance = Math.random();
 
-    if (placeObstacleChance > .85) {
+    if (placeObstacleChance > .9) {
         obstacle.img = obstacle3Img;
         obstacle.width = obstacle3Width;
         obstacleArray.push(obstacle);
     }
 
-    else if (placeObstacleChance > .65) {
+    else if (placeObstacleChance > .7) {
         obstacle.img = obstacle2Img;
         obstacle.width = obstacle2Width;
         obstacleArray.push(obstacle);
     }
 
-    else if (placeObstacleChance > .35) {
+    else if (placeObstacleChance > .4) {
         obstacle.img = obstacle1Img;
         obstacle.width = obstacle1Width;
         obstacleArray.push(obstacle);
@@ -230,8 +231,13 @@ const score = () => {
                 velocityX = -14;
                 break;
 
-            case 700:
+            case 500:
                     board.style.backgroundImage = 'url("/background/lvl4Background.png")'
+                    dinoImg1.src = './sprite/grr.png'
+                    dinoImg2.src = './sprite/grr2.png'
+                    dinoImg3.src = './sprite/grr3.png'
+                    dinoDuck1.src = './sprite/grr-duck1.png'
+                    dinoDuck2.src = './sprite/grr-duck2.png'
                     battleTheme1.pause()
                     final.volume = 0.05
                     final.play()

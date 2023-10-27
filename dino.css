@@ -1,65 +1,65 @@
 html {
-    font-size: 62.5%;
+  font-size: 62.5%;
 }
 
 body {
-    font-family:'Courier New', Courier, monospace;
-    color: white;
-    background-color: black;
-    text-align:center;
+  font-family: "Courier New", Courier, monospace;
+  color: white;
+  background-color: black;
+  text-align: center;
 }
 
 h1 {
-    font-size: 5rem;
-    text-shadow: 5px 0px 10px rgba(230, 7, 238, 0.82);
+  font-size: 5rem;
+  text-shadow: 5px 0px 10px rgba(230, 7, 238, 0.82);
 }
-  
+
 h2,
-  #highscore {
-    font-size: 2rem;
-    text-shadow: 5px 0px 10px rgba(0, 0, 0, 0.82);
+#highscore {
+  font-size: 2rem;
+  text-shadow: 5px 0px 10px rgba(0, 0, 0, 0.82);
 }
 
 #board {
-    background-image: url(background/lvl1Background.png);
-    background-size: cover;
-    border-bottom: 1px solid rgb(255, 255, 255);
+  background-image: url(background/lvl1Background.png);
+  background-size: cover;
+  border-bottom: 1px solid rgb(255, 255, 255);
 }
 
 #startGame {
-    color: white;
-    margin : 50px 0 50px 0;
-    font-family: "Bungee", sans-serif;
-    background-size: cover;
-    background-position: center;
-    background-color: black;
-    border: none;
+  color: white;
+  margin: 50px 0 50px 0;
+  font-family: "Bungee", sans-serif;
+  background-size: cover;
+  background-position: center;
+  background-color: black;
+  border: none;
 }
 
 #startGame img {
-    width: 13%;
-    height: 12%; 
+  width: 13%;
+  height: 12%;
 }
 
-#gameOver h4{
-    font-size: 3rem;
-    text-shadow: 5px 0px 10px rgba(0, 0, 0, 0.82);
+#gameOver h4 {
+  font-size: 3rem;
+  text-shadow: 5px 0px 10px rgba(0, 0, 0, 0.82);
 }
 
 #gameOver p {
-    font-size: 2rem;
-    text-shadow: 5px 0px 10px rgba(0, 255, 255, 0.82);
-    font-family: "Press Start 2P", sans-serif;
+  font-size: 2rem;
+  font-family: "Bungee", sans-serif;
+  background-color: black;
 }
 
-#gameOver img{
-    width: 20%;
-    padding: 30px 0 50px;
-    height: auto;
-    margin-top: 2rem;
+#gameOver img {
+  width: 20%;
+  padding: 30px 0 50px;
+  height: auto;
+  margin-top: 2rem;
+  background-color: black;
 }
 
-.invisible{
-    display:none
+.invisible {
+  display: none;
 }
-
