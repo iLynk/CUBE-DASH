@@ -106,6 +106,7 @@ const gameOver = () => {
     gusty.pause()
     battleTheme1.pause()
     worldTheme.pause()
+    final.pause()
     clearInterval(scoreInterval)
     clearInterval(obstacleInterval)
     cancelAnimationFrame(updateRAF)
@@ -229,12 +230,12 @@ const score = () => {
                 velocityX = -14;
                 break;
 
-            case 1000:
+            case 700:
                     board.style.backgroundImage = 'url("/background/lvl4Background.png")'
                     battleTheme1.pause()
                     final.volume = 0.05
                     final.play()
-                    velocityX = -16;
+                    velocityX = -18;
                 break;
     
             default:
