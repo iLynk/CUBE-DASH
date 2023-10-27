@@ -2,6 +2,13 @@
 const board = document.getElementById("board");
 const boardWidth = window.innerWidth / 1.4;
 const boardHeight = window.innerHeight / 1.6;
+const imagePaths = [
+  "/background/lvl1Background.png",
+  "/background/lvl2Background.png",
+  "/background/lvl3Background.png",
+  "/background/lvl4Background.png",
+  // Ajoutez ici tous les chemins d'accès aux images que vous souhaitez précharger
+];
 let context;
 
 // DINO
@@ -55,6 +62,10 @@ const startGame = () => {
   dinoImg3.src = "./sprite/dino3.png";
   dinoDuck1.src = "./sprite/dino-duck1.png";
   dinoDuck2.src = "./sprite/dino-duck2.png";
+  worldTheme.currentTime = 0;
+  battleTheme1.currentTime = 0;
+  gusty.currentTime = 0;
+  final.currentTime = 0;
   newRecord.pause();
   gameOverDisplay.classList.add("invisible");
   worldTheme.volume = 0.05;
@@ -63,7 +74,6 @@ const startGame = () => {
   count = 0;
   scoreDisplay.classList.remove("invisible");
   board.classList.remove("invisible");
-  board.style.backgroundColor = "rgb(54, 77, 67)";
   startGameButton.classList.add("invisible");
   board.height = boardHeight;
   board.width = boardWidth;
@@ -90,8 +100,9 @@ const startGame = () => {
   if (obstacleInterval) {
     clearInterval(obstacleInterval);
   }
-
-  obstacleInterval = setInterval(placeObstacles, 900);
+  clearInterval(dinoImageChangeInterval);
+  clearInterval(dinoDuckImageChangeInterval);
+  obstacleInterval = setInterval(placeObstacles, 1300);
 };
 
 let updateRAF;
@@ -184,15 +195,15 @@ function placeObstacles() {
 
   let placeObstacleChance = Math.random();
 
-  if (placeObstacleChance > 0.9) {
+  if (placeObstacleChance > 0.75) {
     obstacle.img = obstacle3Img;
     obstacle.width = obstacle3Width;
     obstacleArray.push(obstacle);
-  } else if (placeObstacleChance > 0.7) {
+  } else if (placeObstacleChance > 0.45) {
     obstacle.img = obstacle2Img;
     obstacle.width = obstacle2Width;
     obstacleArray.push(obstacle);
-  } else if (placeObstacleChance > 0.4) {
+  } else if (placeObstacleChance > 0.15) {
     obstacle.img = obstacle1Img;
     obstacle.width = obstacle1Width;
     obstacleArray.push(obstacle);
@@ -221,7 +232,9 @@ const score = () => {
         worldTheme.pause();
         gusty.volume = 0.03;
         gusty.play();
-        velocityX = -11;
+        velocityX = -10;
+        clearInterval(obstacleInterval);
+        obstacleInterval = setInterval(placeObstacles, 900);
         break;
 
       case 300:
@@ -229,7 +242,9 @@ const score = () => {
         gusty.pause();
         battleTheme1.volume = 0.05;
         battleTheme1.play();
-        velocityX = -14;
+        velocityX = -13;
+        clearInterval(obstacleInterval);
+        obstacleInterval = setInterval(placeObstacles, 800);
         break;
 
       case 500:
@@ -242,7 +257,9 @@ const score = () => {
         battleTheme1.pause();
         final.volume = 0.05;
         final.play();
-        velocityX = -18;
+        velocityX = -16;
+        clearInterval(obstacleInterval);
+        obstacleInterval = setInterval(placeObstacles, 600);
         break;
 
       default:
@@ -250,17 +267,20 @@ const score = () => {
     }
     scoreDisplay.textContent = `YOUR SCORE : ${count}`;
     count++;
-  }, 100);
+  }, 90);
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  startGameButton.addEventListener("click", () => {
-    document.addEventListener("keydown", (e) => {
-      console.log("keydown event");
-      moveDino(e);
+  preloadImages().then(() => {
+    // Toutes les images sont chargées, vous pouvez commencer le jeu ici.
+    startGameButton.addEventListener("click", () => {
+      document.addEventListener("keydown", (e) => {
+        console.log("keydown event");
+        moveDino(e);
+      });
+      score();
+      startGame();
     });
-    score();
-    startGame();
   });
 });
 
@@ -383,4 +403,22 @@ function duck() {
 
   // Lancez l'animation de l'accroupissement
   dinoDuckImageChangeInterval = setInterval(animateDino, 100);
+}
+
+const loadedImages = [];
+
+function preloadImages() {
+  const imagePromises = imagePaths.map((path) => {
+    const img = new Image();
+    img.src = path;
+
+    return new Promise((resolve) => {
+      img.onload = () => {
+        loadedImages.push(img);
+        resolve(img);
+      };
+    });
+  });
+
+  return Promise.all(imagePromises);
 }
